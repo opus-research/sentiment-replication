@@ -1,10 +1,10 @@
 # Replication package for '"Looks Good To Me ;-)": Assessing Sentiment Analysis Tools for Pull Request Discussions'
 
-For blind review, this replication package only contains dataset.json, which is the data used for the analyses presented in the paper. For the full version, we will have detailed instructions about how the data was collected, including the scripts.
+This repository contain the data and scripts generated/utilized in the paper.
 
 ## dataset.json
 
-dataset.json contains an array of objects that have the following structure:
+dataset.json contains the dataset that was created for this work.
 
 ```json
  {
@@ -34,4 +34,13 @@ dataset.json contains an array of objects that have the following structure:
       "Senti4SD": "neutral"
     }
   }
+```
+
+## Script.ipynb
+
+This file contains the scripts utilized for the analyses present in the paper.
+
+## validatool
+
+This folder contains the source code for the web application utilized for data collection. (WARNING: This source code is not fit for production use, as there are bugs (that did not affect the results) present in the code.) You also have to directly manipulate the database for it to work properly.
 ```
