@@ -1,0 +1,38 @@
+{% load markdownify %}
+
+<!-- Vertically centered scrollable modal -->
+<div id="guidingtextmodal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Guiding Text for: {{ validation.title }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ validation.guiding_text | markdownify }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-body > h1, .modal-body > h2, .modal-body > h3, .modal-body > h4, .modal-body > h5, .modal-body > p {
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  tables = document.getElementsByTagName("table");
+  for (let i = 0; i < tables.length; i++) {
+        tables[i].classList.add("table")
+        tables[i].classList.add("table-dark")
+        tables[i].classList.add("table-hover")
+        tables[i].classList.add("table-striped")
+    }
+});
+</script>

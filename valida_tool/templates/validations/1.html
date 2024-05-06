@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% load markdownify %}
+
+{% block content %}
+    <div class="container px-4 my-5">
+        <div class="alert alert-info d-flex flex-column" role="alert">
+        Only start the validation after you've read the guiding text!
+            <div class="mt-2 gap-3 d-flex flex-row">
+                {% include 'includes/guide_modal_button.html' %}
+                <a href="{% url 'guide' validation_id=validation.id %}" target="_blank"><button type="button" class="btn btn-secondary" >Open Guiding Text in a New Window</button></a>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'validation' validation_id=validation.id %}">
+            {% csrf_token %}
+            <h1> First Part - Message Only </h1>
+
+            <div class="container my-5 p-5 bg-body-tertiary border">
+                {{ payload.message | markdownify }}
+            </div>
+
+            <h2> Can you identify an emotion in this sentence? </h2>
+            <div class="container d-flex flex-row gap-5 my-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="emotion_present_part1" id="emotion_present_no_part1" value="no" checked>
+                    <label class="form-check-label" for="emotion_present_no_part1">
+                        No
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="emotion_present_part1" id="emotion_present_yes_part1" value="yes">
+                    <label class="form-check-label" for="emotion_present_yes_part1">
+                        Yes
+                    </label>
+                </div>
+            </div>
+
+            <h2> What emotions can you identify in this sentence? </h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Positive:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" name="love_checkbox_part1" type="checkbox" id="love_checkbox_part1" disabled>
+                            <label class="form-check-label" for="love_checkbox_part1"><h5>Love</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="joy_checkbox_part1" type="checkbox" id="joy_checkbox_part1" disabled>
+                            <label class="form-check-label" for="joy_checkbox_part1"><h5>Joy</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="positivesurprise_checkbox_part1" type="checkbox" id="positivesurprise_checkbox_part1" disabled>
+                            <label class="form-check-label" for="positivesurprise_checkbox_part1"><h5>Surprise</h5></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Negative:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" name="anger_checkbox_part1" type="checkbox" id="anger_checkbox_part1" disabled>
+                            <label class="form-check-label" for="anger_checkbox_part1"><h5>Anger</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="sadness_checkbox_part1" id="sadness_checkbox_part1" disabled>
+                            <label class="form-check-label" for="sadness_checkbox_part1"><h5>Sadness</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="fear_checkbox_part1" id="fear_checkbox_part1" disabled>
+                            <label class="form-check-label" for="fear_checkbox_part1"><h5>Fear</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="negativesurprise_checkbox_part1" id="negativesurprise_checkbox_part1" disabled>
+                            <label class="form-check-label" for="negativesurprise_checkbox_part1"><h5>Surprise</h5></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="my-3"> How would you evaluate the sentiment in the sentence? </h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Positive:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part1" id="radio_positive_part1_1" value="1" disabled>
+                            <label class="form-check-label" for="radio_positive_part1_1">1 (Slightly Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part1" id="radio_positive_part1_2" value="2" disabled>
+                            <label class="form-check-label" for="radio_positive_part1_2">2 (Moderately Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part1" id="radio_positive_part1_3" value="3" disabled>
+                            <label class="form-check-label" for="radio_positive_part1_3">3 (Very Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part1" id="radio_positive_part1_4" value="4" disabled>
+                            <label class="form-check-label" for="radio_positive_part1_4">4 (Extremely Present)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Negative:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part1" id="radio_negative_part1_1" value="1" disabled>
+                            <label class="form-check-label" for="radio_negative_part1_1">1 (Slightly Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part1" id="radio_negative_part1_2" value="2" disabled>
+                            <label class="form-check-label" for="radio_negative_part1_2">2 (Moderately Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part1" id="radio_negative_part1_3" value="3" disabled>
+                            <label class="form-check-label" for="radio_negative_part1_3">3 (Very Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part1" id="radio_negative_part1_4" value="4" disabled>
+                            <label class="form-check-label" for="radio_negative_part1_4">4 (Extremely Present)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="my-3"> How confident are you in the answers for this part? </h2>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part1" id="radio_confidence_part1_1" value="1" checked>
+                <label class="form-check-label" for="radio_confidence_part1_1">1 (Very Little)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part1" id="radio_confidence_part1_2" value="2">
+                <label class="form-check-label" for="radio_confidence_part1_2">2 (Little)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part1" id="radio_confidence_part1_3" value="3">
+                <label class="form-check-label" for="radio_confidence_part1_3">3 (Moderate)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part1" id="radio_confidence_part1_4" value="4">
+                <label class="form-check-label" for="radio_confidence_part1_4">4 (Strong)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part1" id="radio_confidence_part1_5" value="5">
+                <label class="form-check-label" for="radio_confidence_part1_5">5 (Very Strong)</label>
+            </div>
+            <h2 class="my-3"> Additional comments? </h2>
+            <textarea class="form-control" name="comments-part1" id="comments-part1" rows="3"></textarea>
+            
+            <hr class="mt-5">
+
+            <h1> Second Part - Message with Context </h1>
+
+            <div class="text-center container my-5 p-5 bg-body-tertiary border">
+                <a class="btn btn-success" href="{{ payload.url }} "target="_blank"><h2>Click here to see the original message</h2></a>
+            </div>
+
+            <h2> Can you identify an emotion in this sentence? </h2>
+            <div class="container d-flex flex-row gap-5 my-5">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="emotion_present_part2" id="emotion_present_no_part2" value="no" checked>
+                    <label class="form-check-label" for="emotion_present_no_part2">
+                        No
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="emotion_present_part2" id="emotion_present_yes_part2" value="yes">
+                    <label class="form-check-label" for="emotion_present_yes_part2">
+                        Yes
+                    </label>
+                </div>
+            </div>
+
+            <h2> What emotions can you identify in this sentence? </h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Positive:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="love_checkbox_part2" id="love_checkbox_part2" disabled>
+                            <label class="form-check-label" for="love_checkbox_part2"><h5>Love</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="joy_checkbox_part2" id="joy_checkbox_part2" disabled>
+                            <label class="form-check-label" for="joy_checkbox_part2"><h5>Joy</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="positivesurprise_checkbox_part2" id="positivesurprise_checkbox_part2" disabled>
+                            <label class="form-check-label" for="positivesurprise_checkbox_part2"><h5>Surprise</h5></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Negative:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="anger_checkbox_part2" id="anger_checkbox_part2" disabled>
+                            <label class="form-check-label" for="anger_checkbox_part2"><h5>Anger</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="sadness_checkbox_part2" id="sadness_checkbox_part2" disabled>
+                            <label class="form-check-label" for="sadness_checkbox_part2"><h5>Sadness</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="fear_checkbox_part2" id="fear_checkbox_part2" disabled>
+                            <label class="form-check-label" for="fear_checkbox_part2"><h5>Fear</h5></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="negativesurprise_checkbox_part2" id="negativesurprise_checkbox_part2" disabled>
+                            <label class="form-check-label" for="negativesurprise_checkbox_part2"><h5>Surprise</h5></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="my-3"> How would you evaluate the sentiment in the sentence? </h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Positive:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part2" id="radio_positive_part2_1" value="1" disabled>
+                            <label class="form-check-label" for="radio_positive_part2_1">1 (Slightly Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part2" id="radio_positive_part2_2" value="2" disabled>
+                            <label class="form-check-label" for="radio_positive_part2_2">2 (Moderately Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part2" id="radio_positive_part2_3" value="3" disabled>
+                            <label class="form-check-label" for="radio_positive_part2_3">3 (Very Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_positive_part2" id="radio_positive_part2_4" value="4" disabled>
+                            <label class="form-check-label" for="radio_positive_part2_4">4 (Extremely Present)</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h4 class="my-3">Negative:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part2" id="radio_negative_part2_1" value="1" disabled>
+                            <label class="form-check-label" for="radio_negative_part2_1">1 (Slightly Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part2" id="radio_negative_part2_2" value="2" disabled>
+                            <label class="form-check-label" for="radio_negative_part2_2">2 (Moderately Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part2" id="radio_negative_part2_3" value="3" disabled>
+                            <label class="form-check-label" for="radio_negative_part2_3">3 (Very Present)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radio_negative_part2" id="radio_negative_part2_4" value="4" disabled>
+                            <label class="form-check-label" for="radio_negative_part2_4">4 (Extremely Present)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="my-3"> How confident are you in the answers for this part? </h2>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part2" id="radio_confidence_part2_1" value="1" checked>
+                <label class="form-check-label" for="radio_confidence_part2_1">1 (Very Little)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part2" id="radio_confidence_part2_2" value="2">
+                <label class="form-check-label" for="radio_confidence_part2_2">2 (Little)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part2" id="radio_confidence_part2_3" value="3">
+                <label class="form-check-label" for="radio_confidence_part2_3">3 (Moderate)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part2" id="radio_confidence_part2_4" value="4">
+                <label class="form-check-label" for="radio_confidence_part2_4">4 (Strong)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radio_confidence_part2" id="radio_confidence_part2_5" value="5">
+                <label class="form-check-label" for="radio_confidence_part2_5">5 (Very Strong)</label>
+            </div>
+            <h2 class="my-3"> Additional comments? </h2>
+            <textarea class="form-control" name="comments-part2" id="comments-part2" rows="3"></textarea>
+            <h2 class="my-3">
+                Is there a reason for this message to be excluded? If there isn't, leave this field blank.
+            </h2>
+            <textarea class="form-control" name="comments-part2" id="comments-part2" rows="3" placeholder="e.g., the auther of the message is a bot, the message is not in english, etc."></textarea>
+            <button type="submit" class="py-3 w-100 mt-5 btn btn-primary">Submit Response</button>
+        </form>
+
+
+    </div>
+    {% include 'includes/guide_modal.html' %}
+
+    <script>
+        function updateRadio(part, positive, disabled){
+            for (let i = 1; i <= 4; i++){
+                let selector = "radio_" + (positive ? "positive" : "negative") + "_part" + part.toString() + "_" + i.toString()
+                document.getElementById(selector).disabled = disabled
+                if (disabled) {
+                    document.getElementById(selector).checked = false
+                }
+            }
+        }
+
+        function updateEmotions(part, disabled){
+            ids = [`love_checkbox_part`, `joy_checkbox_part`, `positivesurprise_checkbox_part`, `anger_checkbox_part`,
+            `sadness_checkbox_part`, `fear_checkbox_part`, `negativesurprise_checkbox_part`]
+            ids.forEach(e => {
+                let final_id = e.concat("", part.toString())
+                document.querySelector("input[id='" + final_id + "']").disabled = disabled
+                if (disabled) {
+                    document.querySelector("input[id='" + final_id + "']").checked = false
+                }
+            })
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+          elements = document.getElementsByTagName("pre");
+          for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.add("border")
+            }
+          elements = document.getElementsByTagName("blockquote");
+          for (let i = 0; i < elements.length; i++) {
+              elements[i].classList.add("bg-body-secondary")
+            }
+        });
+        const form = document.querySelector('form');
+        form.addEventListener('change', function(e) {
+            for (let i = 1; i <= 2; i++){
+                if (document.querySelector("input[id='emotion_present_no_part" + i.toString() + "']").checked) {
+                    updateEmotions(i, true)
+                    updateRadio(i, true, true)
+                    updateRadio(i, false, true)
+                }
+                else if (document.querySelector("input[id='emotion_present_yes_part" + i.toString() + "']").checked) {
+                    updateEmotions(i, false)
+                }
+                if (document.querySelector("input[id='love_checkbox_part" + i.toString() + "']").checked
+                    || document.querySelector("input[id='joy_checkbox_part" + i.toString() + "']").checked
+                    || document.querySelector("input[id='positivesurprise_checkbox_part" + i.toString() + "']").checked) {
+                    updateRadio(i, true, false)
+                }
+                else if ((!document.querySelector("input[id='love_checkbox_part" + i.toString() + "']").checked
+                    && !document.querySelector("input[id='joy_checkbox_part" + i.toString() + "']").checked
+                    && !document.querySelector("input[id='positivesurprise_checkbox_part" + i.toString() + "']").checked)){
+                    updateRadio(i, true, true)
+                }
+                if (document.querySelector("input[id='anger_checkbox_part" + i.toString() + "']").checked
+                    || document.querySelector("input[id='sadness_checkbox_part" + i.toString() + "']").checked
+                    || document.querySelector("input[id='fear_checkbox_part" + i.toString() + "']").checked
+                    || document.querySelector("input[id='negativesurprise_checkbox_part" + i.toString() + "']").checked) {
+                    updateRadio(i, false, false)
+                }
+                else if (!document.querySelector("input[id='anger_checkbox_part" + i.toString() + "']").checked
+                    && !document.querySelector("input[id='sadness_checkbox_part" + i.toString() + "']").checked
+                    && !document.querySelector("input[id='fear_checkbox_part" + i.toString() + "']").checked
+                    && !document.querySelector("input[id='negativesurprise_checkbox_part" + i.toString() + "']").checked) {
+                    updateRadio(i, false, true)
+                }
+            }
+        });
+    </script>
+
+    <style>
+        blockquote {
+              border-left: 10px solid #ccc;
+              margin: 1.5em 10px;
+              padding: 0.5em 10px;
+              quotes: "\201C""\201D""\2018""\2019";
+            }
+            blockquote:before {
+              color: #ccc;
+              content: open-quote;
+              font-size: 4em;
+              line-height: 0.1em;
+              margin-right: 0.25em;
+              vertical-align: -0.4em;
+            }
+            blockquote p {
+              display: inline;
+            }
+    </style>
+
+{% endblock content %}
