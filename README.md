@@ -43,4 +43,3 @@ This file contains the scripts utilized for the analyses present in the paper.
 ## validatool
 
 This folder contains the source code for the web application utilized for data collection. (WARNING: This source code is not fit for production use, as there are bugs (that did not affect the results) present in the code.) You also have to directly manipulate the database for it to work properly.
-```
